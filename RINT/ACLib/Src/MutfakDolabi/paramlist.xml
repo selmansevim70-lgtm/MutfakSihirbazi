@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ParamSection>
+	<ParamSectHeader>
+		<AutoHotspots>false</AutoHotspots>
+		<StatBits>
+			<STBit_FixSize/>
+		</StatBits>
+		<WDLeftFrame>0</WDLeftFrame>
+		<WDRightFrame>0</WDRightFrame>
+		<WDTopFrame>0</WDTopFrame>
+		<WDBotFrame>0</WDBotFrame>
+		<LayFlags>65535</LayFlags>
+		<WDMirrorThickness>0</WDMirrorThickness>
+		<WDWallInset>0</WDWallInset>
+	</ParamSectHeader>
+	<Parameters SectVersion="27" SectionFlags="0" SubIdent="0">
+		<Length Name="A">
+			<Description><![CDATA["Genişlik"]]></Description>
+			<Fix/>
+			<Value>0.6</Value>
+		</Length>
+		<Length Name="B">
+			<Description><![CDATA["Derinlik (kapak dahil)"]]></Description>
+			<Fix/>
+			<Value>0.6</Value>
+		</Length>
+		<Length Name="ZZYZX">
+			<Description><![CDATA["Yükseklik"]]></Description>
+			<Fix/>
+			<Value>0.91</Value>
+		</Length>
+		<Boolean Name="AC_show2DHotspotsIn3D">
+			<Description><![CDATA["Show 2D Hotspots in 3D"]]></Description>
+			<Fix/>
+			<Flags>
+				<ParFlg_Hidden/>
+			</Flags>
+			<Value>1</Value>
+		</Boolean>
+		<String Name="tip">
+			<Description><![CDATA["Dolap tipi"]]></Description>
+			<Flags>
+				<ParFlg_BoldName/>
+			</Flags>
+			<Value><![CDATA["Alt Dolap"]]></Value>
+		</String>
+		<String Name="duzen">
+			<Description><![CDATA["Ön düzen"]]></Description>
+			<Flags>
+				<ParFlg_BoldName/>
+			</Flags>
+			<Value><![CDATA["Kapaklı"]]></Value>
+		</String>
+		<String Name="modulKodu">
+			<Description><![CDATA["Modül kodu"]]></Description>
+			<Value><![CDATA[""]]></Value>
+		</String>
+		<Integer Name="duvarNo">
+			<Description><![CDATA["Duvar no"]]></Description>
+			<Value>0</Value>
+		</Integer>
+		<Integer Name="kapakSayisi">
+			<Description><![CDATA["Kapak sayısı (0 = otomatik)"]]></Description>
+			<Value>0</Value>
+		</Integer>
+		<String Name="acilis">
+			<Description><![CDATA["Tek kapak: menteşe tarafı"]]></Description>
+			<Value><![CDATA["Sol"]]></Value>
+		</String>
+		<Integer Name="cekmeceSayisi">
+			<Description><![CDATA["Çekmece sayısı"]]></Description>
+			<Value>3</Value>
+		</Integer>
+		<Length Name="ustCekmeceYuk">
+			<Description><![CDATA["Üst çekmece yüksekliği"]]></Description>
+			<Value>0.15</Value>
+		</Length>
+		<Integer Name="rafSayisi">
+			<Description><![CDATA["Raf sayısı"]]></Description>
+			<Value>1</Value>
+		</Integer>
+		<Length Name="korGen">
+			<Description><![CDATA["Kör köşe panel genişliği"]]></Description>
+			<Value>0.65</Value>
+		</Length>
+		<String Name="korTaraf">
+			<Description><![CDATA["Kör köşe tarafı"]]></Description>
+			<Value><![CDATA["Sağ"]]></Value>
+		</String>
+		<Boolean Name="eviyeVar">
+			<Description><![CDATA["Eviye"]]></Description>
+			<Value>0</Value>
+		</Boolean>
+		<Boolean Name="ocakVar">
+			<Description><![CDATA["Ocak"]]></Description>
+			<Value>0</Value>
+		</Boolean>
+		<Length Name="buzdolabiYuk">
+			<Description><![CDATA["Buzdolabı yüksekliği"]]></Description>
+			<Value>1.85</Value>
+		</Length>
+		<Length Name="govdeKal">
+			<Description><![CDATA["Gövde kalınlığı"]]></Description>
+			<Value>0.018</Value>
+		</Length>
+		<Length Name="kapakKal">
+			<Description><![CDATA["Kapak kalınlığı"]]></Description>
+			<Value>0.018</Value>
+		</Length>
+		<Length Name="kapakBosluk">
+			<Description><![CDATA["Kapak arası boşluk"]]></Description>
+			<Value>0.003</Value>
+		</Length>
+		<Length Name="bazaYuk">
+			<Description><![CDATA["Baza yüksekliği"]]></Description>
+			<Value>0.10</Value>
+		</Length>
+		<Length Name="bazaGeri">
+			<Description><![CDATA["Baza geri çekme"]]></Description>
+			<Value>0.05</Value>
+		</Length>
+		<Boolean Name="tezgahVar">
+			<Description><![CDATA["Tezgah"]]></Description>
+			<Value>1</Value>
+		</Boolean>
+		<Length Name="tezgahKal">
+			<Description><![CDATA["Tezgah kalınlığı"]]></Description>
+			<Value>0.04</Value>
+		</Length>
+		<Length Name="tezgahTasma">
+			<Description><![CDATA["Tezgah ön taşma"]]></Description>
+			<Value>0.02</Value>
+		</Length>
+		<Boolean Name="kulpVar">
+			<Description><![CDATA["Kulp"]]></Description>
+			<Value>1</Value>
+		</Boolean>
+		<Length Name="kulpBoy">
+			<Description><![CDATA["Kulp boyu"]]></Description>
+			<Value>0.16</Value>
+		</Length>
+		<Material Name="matGovde">
+			<Description><![CDATA["Gövde yüzeyi (0 = varsayılan)"]]></Description>
+			<Value>0</Value>
+		</Material>
+		<Material Name="matKapak">
+			<Description><![CDATA["Kapak yüzeyi (0 = varsayılan)"]]></Description>
+			<Value>0</Value>
+		</Material>
+		<Material Name="matTezgah">
+			<Description><![CDATA["Tezgah yüzeyi (0 = varsayılan)"]]></Description>
+			<Value>0</Value>
+		</Material>
+		<Material Name="matKulp">
+			<Description><![CDATA["Kulp yüzeyi (0 = varsayılan)"]]></Description>
+			<Value>0</Value>
+		</Material>
+		<Material Name="matCihaz">
+			<Description><![CDATA["Cihaz yüzeyi (0 = varsayılan)"]]></Description>
+			<Value>0</Value>
+		</Material>
+		<PenColor Name="penKontur">
+			<Description><![CDATA["Plan kontur kalemi"]]></Description>
+			<Value>1</Value>
+		</PenColor>
+		<FillPattern Name="taramaTipi">
+			<Description><![CDATA["Plan taraması (0 = yok)"]]></Description>
+			<Value>0</Value>
+		</FillPattern>
+		<PenColor Name="taramaKalem">
+			<Description><![CDATA["Tarama kalemi"]]></Description>
+			<Value>1</Value>
+		</PenColor>
+		<PenColor Name="taramaArka">
+			<Description><![CDATA["Tarama arka plan kalemi"]]></Description>
+			<Value>0</Value>
+		</PenColor>
+		<LineType Name="ustCizgi">
+			<Description><![CDATA["Üst dolap plan çizgisi"]]></Description>
+			<Value>1</Value>
+		</LineType>
+	</Parameters>
+</ParamSection>

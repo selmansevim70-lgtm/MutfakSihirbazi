@@ -1,0 +1,52 @@
+﻿HOTSPOT2 0, 0
+HOTSPOT2 A, 0
+HOTSPOT2 0, B
+HOTSPOT2 A, B
+HOTSPOT2 A / 2, 0
+
+PEN penKontur
+IF tipUst THEN SET LINE_TYPE ustCizgi
+
+maske = 5
+IF taramaTipi > 0 THEN
+	SET FILL taramaTipi
+	maske = 7
+ENDIF
+
+y0 = kk
+IF tezgah THEN y0 = -tezgahTasma
+IF dzDolgu AND NOT(tezgah) THEN y0 = 0
+
+POLY2_B 4, maske, taramaKalem, taramaArka,
+	0, y0, 1,
+	A, y0, 1,
+	A, B, 1,
+	0, B, 1
+
+! Kapak hattı
+IF NOT(tezgah) AND NOT(dzDolgu) THEN RECT2 0, 0, A, kk
+
+! Üst dolap: çapraz, boy dolap: tek çapraz
+IF tipUst THEN
+	LINE2 0, kk, A, B
+	LINE2 A, kk, 0, B
+ENDIF
+IF tipBoy THEN LINE2 0, B, A, kk
+
+! Eviye ve batarya
+IF eviye THEN
+	RECT2 evX, evY, evX + evW, evY + evD
+	RECT2 evX + 0.02, evY + 0.02, evX + evW - 0.02, evY + evD - 0.02
+	CIRCLE2 A / 2, evY + evD + 0.04, 0.025
+ENDIF
+
+! Ocak
+IF ocak THEN
+	ox = (A - 0.56) / 2
+	oy = (B - tezgahTasma - 0.49) / 2
+	RECT2 ox, oy, ox + 0.56, oy + 0.49
+	CIRCLE2 ox + 0.15, oy + 0.13, 0.08
+	CIRCLE2 ox + 0.41, oy + 0.13, 0.09
+	CIRCLE2 ox + 0.15, oy + 0.36, 0.07
+	CIRCLE2 ox + 0.41, oy + 0.36, 0.07
+ENDIF

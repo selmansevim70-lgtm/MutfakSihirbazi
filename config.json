@@ -1,0 +1,13 @@
+{
+    "addOnName": "MutfakSihirbazi",
+    "defaultLanguage": "INT",
+    "languages": [
+        "INT"
+    ],
+    "version": "1.0.0",
+    "copyright": {
+        "name": "Mutfak Sihirbazi",
+        "year": "%Y"
+    },
+    "description": "Archicad icin parametrik mutfak dolabi eklentisi"
+}

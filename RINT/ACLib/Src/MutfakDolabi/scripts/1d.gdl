@@ -1,0 +1,71 @@
+﻿! ============================================================
+!  MUTFAK DOLABI – Ana komut dosyası (Mutfak Sihirbazı eklentisi)
+!  x = genişlik, y = 0 dolap ÖN yüzü, y = B arka (duvar)
+! ============================================================
+tipAlt = (tip = "Alt Dolap")
+tipUst = (tip = "Üst Dolap")
+tipBoy = (tip = "Boy Dolap")
+
+dzKapak   = (duzen = "Kapaklı")
+dzCekmece = (duzen = "Çekmeceli")
+dzCK      = (duzen = "Çekmece + Kapak")
+dzFirin   = (duzen = "Ankastre Fırın")
+dzBulasik = (duzen = "Bulaşık Makinesi")
+dzBuzdol  = (duzen = "Buzdolabı")
+dzKor     = (duzen = "Kör Köşe")
+dzDolgu   = (duzen = "Dolgu")
+dzAcik    = (duzen = "Açık Raf")
+
+kk = kapakKal
+gk = govdeKal
+bs = kapakBosluk
+
+baza = NOT(tipUst) AND NOT(dzBuzdol)
+zAlt = 0
+IF baza THEN zAlt = bazaYuk
+
+tezgah = tipAlt AND tezgahVar
+zUst = ZZYZX
+IF tezgah THEN zUst = ZZYZX - tezgahKal
+
+gH = zUst - zAlt      ! gövde yüksekliği
+gD = B - kk           ! gövde derinliği
+iW = A - 2 * gk       ! iç genişlik
+
+eviye = eviyeVar AND tezgah
+ocak  = ocakVar AND tezgah
+
+! Varsayılan yüzeyler (parametre 0 ise)
+mG = matGovde
+IF mG = 0 THEN
+	DEFINE MATERIAL "MS Govde" 1, 0.91, 0.90, 0.88
+	mG = IND (MATERIAL, "MS Govde")
+ENDIF
+mK = matKapak
+IF mK = 0 THEN
+	DEFINE MATERIAL "MS Kapak" 3, 0.20, 0.21, 0.23
+	mK = IND (MATERIAL, "MS Kapak")
+ENDIF
+mT = matTezgah
+IF mT = 0 THEN
+	DEFINE MATERIAL "MS Tezgah" 3, 0.86, 0.84, 0.80
+	mT = IND (MATERIAL, "MS Tezgah")
+ENDIF
+mH = matKulp
+IF mH = 0 THEN
+	DEFINE MATERIAL "MS Kulp" 2, 0.72, 0.72, 0.74
+	mH = IND (MATERIAL, "MS Kulp")
+ENDIF
+mC = matCihaz
+IF mC = 0 THEN
+	DEFINE MATERIAL "MS Cihaz" 2, 0.78, 0.79, 0.81
+	mC = IND (MATERIAL, "MS Cihaz")
+ENDIF
+DEFINE MATERIAL "MS Cam" 3, 0.06, 0.06, 0.07
+mCam = IND (MATERIAL, "MS Cam")
+
+! Eviye ölçüleri
+evW = MIN (A - 0.16, 0.74)
+evD = 0.42
+evX = (A - evW) / 2
+evY = 0.07

@@ -1,0 +1,105 @@
+﻿#include "ResourceIds.hpp"
+
+'STR#' ID_ADDON_INFO "Add-on Name and Description" {
+/* [  1] */		"Mutfak Sihirbazı"
+/* [  2] */		"Seçili duvarlara parametrik mutfak dolapları dizer, usta kurallarını uygular ve kesim listesi çıkarır."
+}
+
+'STR#' ID_ADDON_MENU "Menu" {
+/* [   ] */		"Mutfak"
+/* [  1] */		"Mutfak Sihirbazı (seçili duvarlar)...^10001"
+/* [  2] */		"Kesim Listesi (CSV)..."
+/* [  3] */		"Mutfak Dolabını Nesne Aracına Yükle"
+}
+
+'GDLG' ID_KITCHEN_DLG Modal   40   40  640  536  "Mutfak Sihirbazı" {
+/* [  1] */ Button        530  500  100   26	LargePlain  "Oluştur"
+/* [  2] */ Button        420  500  100   26	LargePlain  "İptal"
+/* [  3] */ Separator      10  488  620    2	
+/* [  4] */ LeftText       10   10  620   20	LargePlain  vCenter  "Seçili duvar yok"
+/* [  5] */ LeftText       10   40  200   22	SmallPlain  vCenter  "Alt dolap yüksekliği (tezgah dahil)"
+/* [  6] */ LengthEdit    215   40   80   22	SmallPlain  "0.00"  "10.00"
+/* [  7] */ LeftText       10   66  200   22	SmallPlain  vCenter  "Alt dolap derinliği"
+/* [  8] */ LengthEdit    215   66   80   22	SmallPlain  "0.00"  "10.00"
+/* [  9] */ LeftText       10   92  200   22	SmallPlain  vCenter  "Tezgah kalınlığı"
+/* [ 10] */ LengthEdit    215   92   80   22	SmallPlain  "0.00"  "10.00"
+/* [ 11] */ LeftText       10  118  200   22	SmallPlain  vCenter  "Baza yüksekliği"
+/* [ 12] */ LengthEdit    215  118   80   22	SmallPlain  "0.00"  "10.00"
+/* [ 13] */ LeftText      320   40  200   22	SmallPlain  vCenter  "Üst dolap alt kotu"
+/* [ 14] */ LengthEdit    525   40   80   22	SmallPlain  "0.00"  "10.00"
+/* [ 15] */ LeftText      320   66  200   22	SmallPlain  vCenter  "Üst dolap yüksekliği"
+/* [ 16] */ LengthEdit    525   66   80   22	SmallPlain  "0.00"  "10.00"
+/* [ 17] */ LeftText      320   92  200   22	SmallPlain  vCenter  "Üst dolap derinliği"
+/* [ 18] */ LengthEdit    525   92   80   22	SmallPlain  "0.00"  "10.00"
+/* [ 19] */ CheckBox      320  118  300   22	SmallPlain  "Üst dolapları otomatik ekle"
+/* [ 20] */ CheckBox       10  148  400   22	SmallPlain  "Dolapları duvarın diğer yüzüne yerleştir"
+/* [ 21] */ LeftText       10  186  310   18	LargePlain  vCenter  "Duvar 1"
+/* [ 22] */ TextEdit       50  206  580   22	SmallPlain  255
+/* [ 23] */ LeftText      330  186  300   18	SmallPlain  vCenter  ""
+/* [ 24] */ TextEdit       50  232  580   22	SmallPlain  255
+/* [ 25] */ LeftText       10  264  310   18	LargePlain  vCenter  "Duvar 2"
+/* [ 26] */ TextEdit       50  284  580   22	SmallPlain  255
+/* [ 27] */ LeftText      330  264  300   18	SmallPlain  vCenter  ""
+/* [ 28] */ TextEdit       50  310  580   22	SmallPlain  255
+/* [ 29] */ LeftText       10  342  310   18	LargePlain  vCenter  "Duvar 3"
+/* [ 30] */ TextEdit       50  362  580   22	SmallPlain  255
+/* [ 31] */ LeftText      330  342  300   18	SmallPlain  vCenter  ""
+/* [ 32] */ TextEdit       50  388  580   22	SmallPlain  255
+/* [ 33] */ Button         10  422  150   24	LargePlain  "Otomatik doldur"
+/* [ 34] */ Button        170  422  120   24	LargePlain  "Kontrol et"
+/* [ 35] */ LeftText      300  422  330   24	SmallPlain  vCenter  ""
+/* [ 36] */ LeftText       10  452  620   32	SmallPlain  "Kodlar: K kapaklı · C çekmeceli · CK çekmece+kapak · E eviye · BM bulaşık m. · F fırın+ocak · BZ buzdolabı · B boy dolap · KK kör köşe · D dolgu · A açık raf · - boşluk.   Örnek: 60BZ 80E 60BM 60C   (üst boşsa otomatik)"
+/* [ 37] */ LeftText       10  206   40   22	SmallPlain  vCenter  "Alt:"
+/* [ 38] */ LeftText       10  232   40   22	SmallPlain  vCenter  "Üst:"
+/* [ 39] */ LeftText       10  284   40   22	SmallPlain  vCenter  "Alt:"
+/* [ 40] */ LeftText       10  310   40   22	SmallPlain  vCenter  "Üst:"
+/* [ 41] */ LeftText       10  362   40   22	SmallPlain  vCenter  "Alt:"
+/* [ 42] */ LeftText       10  388   40   22	SmallPlain  vCenter  "Üst:"
+/* [ 43] */ Separator      10  176  620    2	
+}
+
+'DLGH' ID_KITCHEN_DLG DLG_Kitchen {
+1	""		Button_1
+2	""		Button_2
+3	""		Separator_3
+4	""		LeftText_4
+5	""		LeftText_5
+6	""		LengthEdit_6
+7	""		LeftText_7
+8	""		LengthEdit_8
+9	""		LeftText_9
+10	""		LengthEdit_10
+11	""		LeftText_11
+12	""		LengthEdit_12
+13	""		LeftText_13
+14	""		LengthEdit_14
+15	""		LeftText_15
+16	""		LengthEdit_16
+17	""		LeftText_17
+18	""		LengthEdit_18
+19	""		CheckBox_19
+20	""		CheckBox_20
+21	""		LeftText_21
+22	""		TextEdit_22
+23	""		LeftText_23
+24	""		TextEdit_24
+25	""		LeftText_25
+26	""		TextEdit_26
+27	""		LeftText_27
+28	""		TextEdit_28
+29	""		LeftText_29
+30	""		TextEdit_30
+31	""		LeftText_31
+32	""		TextEdit_32
+33	""		Button_33
+34	""		Button_34
+35	""		LeftText_35
+36	""		LeftText_36
+37	""		LeftText_37
+38	""		LeftText_38
+39	""		LeftText_39
+40	""		LeftText_40
+41	""		LeftText_41
+42	""		LeftText_42
+43	""		Separator_43
+}

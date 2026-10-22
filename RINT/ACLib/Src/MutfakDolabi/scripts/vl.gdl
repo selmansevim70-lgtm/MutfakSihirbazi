@@ -1,0 +1,24 @@
+﻿VALUES "tip" "Alt Dolap", "Üst Dolap", "Boy Dolap"
+VALUES "duzen" "Kapaklı", "Çekmeceli", "Çekmece + Kapak", "Ankastre Fırın", "Bulaşık Makinesi", "Buzdolabı", "Kör Köşe", "Dolgu", "Açık Raf"
+VALUES "acilis" "Sol", "Sağ"
+VALUES "korTaraf" "Sol", "Sağ"
+VALUES "kapakSayisi" 0, 1, 2, 3, 4
+VALUES "cekmeceSayisi" 1, 2, 3, 4, 5
+VALUES "rafSayisi" 0, 1, 2, 3, 4, 5
+VALUES "A" RANGE [0.02, 1.20]
+VALUES "B" RANGE [0.20, 0.80]
+VALUES "ZZYZX" RANGE [0.20, 2.80]
+
+IF GLOB_MODPAR_NAME = "tip" THEN
+	IF tip = "Alt Dolap" THEN PARAMETERS ZZYZX = 0.91, B = 0.60
+	IF tip = "Üst Dolap" THEN PARAMETERS ZZYZX = 0.72, B = 0.35
+	IF tip = "Boy Dolap" THEN PARAMETERS ZZYZX = 2.22, B = 0.60
+ENDIF
+
+IF tip <> "Alt Dolap" THEN LOCK "tezgahVar", "tezgahKal", "tezgahTasma", "eviyeVar", "ocakVar"
+IF tip = "Üst Dolap" THEN LOCK "bazaYuk", "bazaGeri"
+IF duzen <> "Buzdolabı" THEN LOCK "buzdolabiYuk"
+IF duzen <> "Kör Köşe" THEN LOCK "korGen", "korTaraf"
+IF duzen <> "Çekmeceli" THEN LOCK "cekmeceSayisi"
+IF duzen <> "Çekmece + Kapak" THEN LOCK "ustCekmeceYuk"
+IF duzen = "Çekmeceli" OR duzen = "Dolgu" OR duzen = "Bulaşık Makinesi" OR duzen = "Ankastre Fırın" THEN LOCK "kapakSayisi", "acilis", "rafSayisi"

@@ -1,0 +1,262 @@
+﻿RESOL 16
+nBuz = 0
+
+! --- Baza ---
+IF baza THEN
+	MATERIAL mG
+	ADD 0, kk + bazaGeri, 0
+	BLOCK A, B - kk - bazaGeri, bazaYuk
+	DEL 1
+ENDIF
+
+! --- Gövde ---
+IF NOT(dzDolgu) AND NOT(dzBulasik) AND NOT(dzBuzdol) THEN
+	gz0 = zAlt : gz1 = zUst
+	GOSUB "govde"
+ENDIF
+
+! --- Raflar ---
+IF rafSayisi > 0 AND (dzKapak OR dzCK OR dzKor OR dzAcik) THEN
+	rz0 = zAlt + gk
+	rz1 = zUst - gk
+	IF dzCK THEN rz1 = zUst - ustCekmeceYuk
+	ara = (rz1 - rz0) / (rafSayisi + 1)
+	MATERIAL mG
+	FOR r = 1 TO rafSayisi
+		ADD gk, kk + 0.02, rz0 + r * ara - gk / 2
+		BLOCK iW, gD - 0.028, gk
+		DEL 1
+	NEXT r
+ENDIF
+
+! --- Ön yüz ---
+IF dzKapak THEN
+	kx0 = 0 : kxW = A : kapZ0 = zAlt : kapZ1 = zUst : kapN = kapakSayisi : kulpYer = 0
+	GOSUB "kapaklar"
+ENDIF
+
+IF dzCekmece THEN
+	cz0 = zAlt : cz1 = zUst : cm = MAX (1, cekmeceSayisi)
+	GOSUB "cekmeceler"
+ENDIF
+
+IF dzCK THEN
+	cz0 = zUst - ustCekmeceYuk : cz1 = zUst : cm = 1
+	GOSUB "cekmeceler"
+	kx0 = 0 : kxW = A : kapZ0 = zAlt : kapZ1 = zUst - ustCekmeceYuk : kapN = kapakSayisi : kulpYer = 0
+	GOSUB "kapaklar"
+ENDIF
+
+IF dzKor THEN
+	pX = 0
+	kx0 = korGen
+	IF korTaraf = "Sağ" THEN
+		pX = A - korGen
+		kx0 = 0
+	ENDIF
+	MATERIAL mK
+	ADD pX + bs / 2, 0, zAlt + bs / 2
+	BLOCK korGen - bs, kk, gH - bs
+	DEL 1
+	kxW = A - korGen : kapZ0 = zAlt : kapZ1 = zUst : kapN = kapakSayisi : kulpYer = 0
+	GOSUB "kapaklar"
+ENDIF
+
+IF dzDolgu THEN
+	MATERIAL mK
+	ADD 0, 0, zAlt
+	BLOCK A, kk, gH
+	DEL 1
+ENDIF
+
+IF dzFirin THEN
+	fz0 = zUst - 0.595
+	! Fırın altı çekmece
+	cz0 = zAlt : cz1 = fz0 : cm = 1
+	GOSUB "cekmeceler"
+	! Fırın
+	MATERIAL mC
+	ADD bs / 2, -0.004, fz0 + bs / 2
+	BLOCK A - bs, kk + 0.004, 0.595 - bs
+	DEL 1
+	MATERIAL mCam
+	ADD 0.05, -0.006, fz0 + 0.05
+	BLOCK A - 0.10, 0.002, 0.40
+	DEL 1
+	ADD 0.05, -0.006, fz0 + 0.50
+	BLOCK A - 0.10, 0.002, 0.07
+	DEL 1
+	IF kulpVar THEN
+		hx = 0.08 : hz = fz0 + 0.47 : kL = A - 0.16
+		GOSUB "kulpYatay"
+	ENDIF
+ENDIF
+
+IF dzBulasik THEN
+	MATERIAL mC
+	ADD gk, kk, zAlt
+	BLOCK iW, gD - 0.02, gH - 0.005
+	DEL 1
+	cz0 = zAlt : cz1 = zUst : cm = 1
+	GOSUB "cekmeceler"
+ENDIF
+
+IF dzBuzdol THEN
+	MATERIAL mG
+	ADD 0, kk, 0      : BLOCK gk, gD, ZZYZX : DEL 1
+	ADD A - gk, kk, 0 : BLOCK gk, gD, ZZYZX : DEL 1
+	! Buzdolabı
+	fzTop = MIN (buzdolabiYuk, ZZYZX - 0.05)
+	fw = iW - 0.01
+	MATERIAL mC
+	ADD gk + 0.005, 0.04, 0
+	BLOCK fw, B - 0.07, fzTop
+	DEL 1
+	ADD gk + 0.005, 0, 0.005
+	BLOCK fw, 0.04, 0.62
+	DEL 1
+	ADD gk + 0.005, 0, 0.635
+	BLOCK fw, 0.04, fzTop - 0.64
+	DEL 1
+	IF kulpVar THEN
+		hx = A - gk - 0.05
+		hz = 0.635 + 0.08 : kL = MIN (0.60, fzTop - 0.80)
+		GOSUB "kulpDikey"
+		hz = 0.62 - 0.08 - 0.30 : kL = 0.30
+		GOSUB "kulpDikey"
+	ENDIF
+	! Üst kutu
+	zBox = buzdolabiYuk + 0.03
+	IF ZZYZX - zBox > 0.10 THEN
+		gz0 = zBox : gz1 = ZZYZX
+		nBuz = 1
+		GOSUB "govde"
+		kx0 = 0 : kxW = A : kapZ0 = zBox : kapZ1 = ZZYZX : kapN = kapakSayisi : kulpYer = 1
+		GOSUB "kapaklar"
+	ENDIF
+ENDIF
+
+! --- Tezgah ---
+IF tezgah THEN
+	MATERIAL mT
+	ty0 = -tezgahTasma
+	IF eviye THEN
+		ADD 0, ty0, zUst                    : BLOCK A, evY - ty0, tezgahKal               : DEL 1
+		ADD 0, evY + evD, zUst              : BLOCK A, B - evY - evD, tezgahKal           : DEL 1
+		ADD 0, evY, zUst                    : BLOCK evX, evD, tezgahKal                   : DEL 1
+		ADD evX + evW, evY, zUst            : BLOCK A - evX - evW, evD, tezgahKal         : DEL 1
+		! Hazne
+		MATERIAL mC
+		ADD evX, evY, ZZYZX - 0.20          : BLOCK evW, evD, 0.006                       : DEL 1
+		ADD evX, evY, ZZYZX - 0.20          : BLOCK 0.008, evD, 0.20                      : DEL 1
+		ADD evX + evW - 0.008, evY, ZZYZX - 0.20 : BLOCK 0.008, evD, 0.20                 : DEL 1
+		ADD evX, evY, ZZYZX - 0.20          : BLOCK evW, 0.008, 0.20                      : DEL 1
+		ADD evX, evY + evD - 0.008, ZZYZX - 0.20 : BLOCK evW, 0.008, 0.20                 : DEL 1
+		! Batarya
+		ADD A / 2, evY + evD + 0.04, ZZYZX
+		CYLIND 0.28, 0.016
+		ADDZ 0.28
+		ROTX 90
+		CYLIND 0.20, 0.012
+		DEL 3
+	ELSE
+		ADD 0, ty0, zUst
+		BLOCK A, B - ty0, tezgahKal
+		DEL 1
+	ENDIF
+	IF ocak THEN
+		MATERIAL mCam
+		ADD (A - 0.56) / 2, (B + ty0 - 0.49) / 2, ZZYZX
+		BLOCK 0.56, 0.49, 0.006
+		DEL 1
+	ENDIF
+ENDIF
+
+END
+
+! ================= ALT PROGRAMLAR =================
+
+"govde":
+	gHH = gz1 - gz0
+	MATERIAL mG
+	IF nBuz = 0 THEN
+		ADD 0, kk, gz0      : BLOCK gk, gD, gHH : DEL 1
+		ADD A - gk, kk, gz0 : BLOCK gk, gD, gHH : DEL 1
+	ENDIF
+	ADD gk, kk, gz0            : BLOCK iW, gD, gk               : DEL 1
+	ADD gk, kk, gz1 - gk       : BLOCK iW, gD, gk               : DEL 1
+	ADD gk, B - 0.008, gz0 + gk : BLOCK iW, 0.008, gHH - 2 * gk : DEL 1
+RETURN
+
+"kapaklar":
+	n = kapN
+	IF n < 1 THEN
+		n = CEIL (kxW / 0.60 - 0.000001)
+		IF n < 1 THEN n = 1
+		WHILE n > 1 AND kxW / n < 0.19 DO
+			n = n - 1
+		ENDWHILE
+	ENDIF
+	kw = kxW / n
+	kh = kapZ1 - kapZ0
+	FOR i = 1 TO n
+		x0 = kx0 + (i - 1) * kw
+		MATERIAL mK
+		ADD x0 + bs / 2, 0, kapZ0 + bs / 2
+		BLOCK kw - bs, kk, kh - bs
+		DEL 1
+
+		solMentese = 1
+		IF n = 1 THEN
+			IF acilis = "Sağ" THEN solMentese = 0
+			IF dzKor THEN
+				solMentese = 1
+				IF korTaraf = "Sol" THEN solMentese = 0
+			ENDIF
+		ELSE
+			IF i MOD 2 = 0 THEN solMentese = 0
+		ENDIF
+
+		IF kulpVar THEN
+			kL = MIN (kulpBoy, kh - 0.10)
+			hx = x0 + kw - 0.04
+			IF solMentese = 0 THEN hx = x0 + 0.04
+			hz = kapZ1 - 0.05 - kL
+			IF tipUst OR kulpYer = 1 THEN hz = kapZ0 + 0.05
+			IF tipBoy AND kulpYer = 0 THEN hz = kapZ0 + MIN (1.05, kh / 2) - kL / 2
+			GOSUB "kulpDikey"
+		ENDIF
+	NEXT i
+RETURN
+
+"cekmeceler":
+	ch = (cz1 - cz0) / cm
+	FOR j = 1 TO cm
+		z0 = cz0 + (j - 1) * ch
+		MATERIAL mK
+		ADD bs / 2, 0, z0 + bs / 2
+		BLOCK A - bs, kk, ch - bs
+		DEL 1
+		IF kulpVar THEN
+			kL = MIN (kulpBoy, A - 0.10)
+			hx = A / 2 - kL / 2
+			hz = z0 + ch - 0.04
+			IF ch < 0.12 THEN hz = z0 + ch / 2
+			GOSUB "kulpYatay"
+		ENDIF
+	NEXT j
+RETURN
+
+"kulpDikey":
+	MATERIAL mH
+	ADD hx - 0.006, -0.030, hz              : BLOCK 0.012, 0.012, kL    : DEL 1
+	ADD hx - 0.004, -0.018, hz + 0.010      : BLOCK 0.008, 0.018, 0.008 : DEL 1
+	ADD hx - 0.004, -0.018, hz + kL - 0.018 : BLOCK 0.008, 0.018, 0.008 : DEL 1
+RETURN
+
+"kulpYatay":
+	MATERIAL mH
+	ADD hx, -0.030, hz - 0.006              : BLOCK kL, 0.012, 0.012    : DEL 1
+	ADD hx + 0.010, -0.018, hz - 0.004      : BLOCK 0.008, 0.018, 0.008 : DEL 1
+	ADD hx + kL - 0.018, -0.018, hz - 0.004 : BLOCK 0.008, 0.018, 0.008 : DEL 1
+RETURN
