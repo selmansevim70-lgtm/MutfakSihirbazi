@@ -1,0 +1,36 @@
+name: Derle (Archicad 29)
+
+on:
+  push:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os-type }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os-type: [ windows-2022 ]
+
+    steps:
+      - name: Kodu al
+        uses: actions/checkout@v4
+
+      - name: Python kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Eklentiyi derle
+        run: python Tools/BuildAddOn.py --configFile config.json --acVersion 29 --buildConfig RelWithDebInfo --package
+
+      - name: Derlenen eklentiyi yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: MutfakSihirbazi-AC29-Windows
+          path: Build/Package/**/*.zip
+          if-no-files-found: error
